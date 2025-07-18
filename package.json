@@ -7,8 +7,11 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:api": "newman run postman_collection.json -r cli,html --reporter-html-export report.html"
+    "test": "npm run test:all",
+    "test:api": "newman run postman_collection.json -r cli,html --reporter-html-export report.html",
+    "test:functional": "newman run \"postman/PostMan Collection.postman_collection.json\" -r cli,html --reporter-html-export newman-reports/report.html",
+    "test:performance": "k6 run --summary-export=k6-summary.json ./k6-scripts/api_load_test.js",
+    "test:all": "npm run test:functional && npm run test:performance"
   },
   "keywords": [],
   "devDependencies": {
